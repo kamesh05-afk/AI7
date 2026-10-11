@@ -56,6 +56,22 @@ function enterAI(){
  document.getElementById('assistant').hidden=false;
  document.getElementById('greeting').textContent='Hello, '+name+'!';
 }
+ function sendMessage(){
+ const box=document.getElementById('question');
+ const q=box.value.trim();
+ if(!q)return;
+ const chat=document.getElementById('chat');
+ const user=document.createElement('div');
+ user.className='message';
+ user.textContent='You: '+q;
+ chat.appendChild(user);
+ const reply=document.createElement('div');
+ reply.className='message';
+ reply.textContent='AI7: The AI service is not connected yet. We will configure the AI backend in the next steps.';
+ chat.appendChild(reply);
+ box.value='';
+ chat.scrollTop=chat.scrollHeight;
+ }
 async function sendMessage() {
   const box = document.getElementById("question");
   const chat = document.getElementById("chat");
