@@ -56,21 +56,49 @@ function enterAI(){
  document.getElementById('assistant').hidden=false;
  document.getElementById('greeting').textContent='Hello, '+name+'!';
 }
-function sendMessage(){
- const box=document.getElementById('question');
- const q=box.value.trim();
- if(!q)return;
- const chat=document.getElementById('chat');
- const user=document.createElement('div');
- user.className='message';
- user.textContent='You: '+q;
- chat.appendChild(user);
- const reply=document.createElement('div');
- reply.className='message';
- reply.textContent='AI7: The AI service is not connected yet. We will configure the AI backend in the next steps.';
- chat.appendChild(reply);
- box.value='';
- chat.scrollTop=chat.scrollHeight;
+async function sendMessage() {
+  const box = document.getElementById("question");
+  const chat = document.getElementById("chat");
+  const question = box.value.trim();
+
+  if (!question) return;
+
+  const userMessage = document.createElement("div");
+  userMessage.className = "message";
+  userMessage.textContent = "You: " + question;
+  chat.appendChild(userMessage);
+
+  const aiMessage = document.createElement("div");
+  aiMessage.className = "message";
+  aiMessage.textContent = "AI7: Connecting to AI...";
+  chat.appendChild(aiMessage);
+
+  box.value = "";
+
+  try {
+    // The real AI backend will be connected here.
+    const response = await fetch("YOUR_AI_BACKEND_URL", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ message: question })
+    });
+
+    if (!response.ok) {
+      throw new Error("AI service unavailable.");
+    }
+
+    const data = await response.json();
+    aiMessage.textContent = "AI7: " + data.reply;
+
+  } catch (error) {
+    aiMessage.textContent =
+      "AI7: My AI connection is not configured yet. Please try again later.";
+  }
+
+  chat.scrollTop = chat.scrollHeight;
+}
 }
 function logout(){
  document.getElementById('assistant').hidden=true;
