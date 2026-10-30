@@ -1,126 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#000000">
-<title>AI7 - Your Personal AI</title>
-<style>
-*{box-sizing:border-box}
-body{margin:0;background:#080808;color:white;font-family:Arial,sans-serif}
-header{padding:20px;border-bottom:1px solid #292929;display:flex;align-items:center;gap:12px}
-.logo{background:white;color:black;font-size:25px;font-weight:bold;padding:10px 13px;border-radius:10px}
-header h1{font-size:22px;margin:0}
-header p{font-size:12px;color:#aaa;margin:5px 0 0}
-main{max-width:700px;margin:auto;padding:20px}
-.card{background:#111;border:1px solid #292929;border-radius:16px;padding:20px;margin:18px 0}
-h2{margin-top:0}
-input,button,textarea{width:100%;padding:14px;border-radius:9px;font-size:15px;margin-top:10px}
-input,textarea{background:#080808;border:1px solid #444;color:white}
-button{background:white;color:black;border:0;font-weight:bold;cursor:pointer}
-button:active{opacity:.75}
-.note{color:#aaa;font-size:13px;line-height:1.5}
-#chat{height:260px;overflow-y:auto;border:1px solid #333;border-radius:10px;padding:12px;white-space:pre-wrap}
-.message{padding:10px;margin:8px 0;border-radius:8px;background:#202020;overflow-wrap:anywhere}
-footer{text-align:center;color:#777;padding:20px;font-size:12px}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI7 - Intelligent AI Platform</title>
+
+    <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
-<header>
-<div class="logo">AI7</div>
-<div><h1>AI7 Assistant</h1><p>Your personal AI workspace</p></div>
-</header>
-<main>
-<section class="card" id="login">
-<h2>Welcome to AI7</h2>
-<p class="note">Your AI assistant for learning, coding and ideas.</p>
-<input id="username" placeholder="Enter your display name" maxlength="40">
-<button onclick="enterAI()">Continue to AI7</button>
-<p class="note">Demo only: real account authentication will be added separately.</p>
-</section>
-<section class="card" id="assistant" hidden>
-<h2 id="greeting">AI7 Chat</h2>
-<div id="chat"><div class="message">AI7: Welcome! Ask me something to get started.</div></div>
-<textarea id="question" rows="3" placeholder="Type your question..."></textarea>
-<button onclick="sendMessage()">Send message</button>
-<p class="note" id="status">Interface preview. AI service connection has not been configured yet.</p>
-<button onclick="logout()">Log out</button>
-</section>
-</main>
-<footer>AI7 · Built for learning and creativity</footer>
-<script>
-function enterAI(){
- const name=document.getElementById('username').value.trim();
- if(!name){alert('Please enter your display name.');return}
- document.getElementById('login').hidden=true;
- document.getElementById('assistant').hidden=false;
- document.getElementById('greeting').textContent='Hello, '+name+'!';
-}
- function sendMessage(){
- const box=document.getElementById('question');
- const q=box.value.trim();
- if(!q)return;
- const chat=document.getElementById('chat');
- const user=document.createElement('div');
- user.className='message';
- user.textContent='You: '+q;
- chat.appendChild(user);
- const reply=document.createElement('div');
- reply.className='message';
- reply.textContent='AI7: The AI service is not connected yet. We will configure the AI backend in the next steps.';
- chat.appendChild(reply);
- box.value='';
- chat.scrollTop=chat.scrollHeight;
- }
-async function sendMessage() {
-  const box = document.getElementById("question");
-  const chat = document.getElementById("chat");
-  const question = box.value.trim();
 
-  if (!question) return;
+    <header>
+        <div class="logo">AI7</div>
+        <span>One Question. One Platform. The Right AI.</span>
+    </header>
 
-  const userMessage = document.createElement("div");
-  userMessage.className = "message";
-  userMessage.textContent = "You: " + question;
-  chat.appendChild(userMessage);
+    <main>
+        <section class="hero">
+            <h1>Welcome to AI7</h1>
 
-  const aiMessage = document.createElement("div");
-  aiMessage.className = "message";
-  aiMessage.textContent = "AI7: Connecting to AI...";
-  chat.appendChild(aiMessage);
+            <p>
+                Your intelligent AI platform.
+                Ask anything, and AI7 will identify the right type of AI
+                assistance for your task.
+            </p>
+        </section>
 
-  box.value = "";
+        <section class="chat-container">
 
-  try {
-    // The real AI backend will be connected here.
-    const response = await fetch("YOUR_AI_BACKEND_URL", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ message: question })
-    });
+            <div id="chatBox" class="chat-box">
+                <div class="message bot">
+                    Hello! I'm AI7. What would you like help with?
+                </div>
+            </div>
 
-    if (!response.ok) {
-      throw new Error("AI service unavailable.");
-    }
+            <div class="input-area">
+                <input
+                    type="text"
+                    id="userInput"
+                    placeholder="Ask AI7 anything..."
+                >
 
-    const data = await response.json();
-    aiMessage.textContent = "AI7: " + data.reply;
+                <button id="sendButton">Send</button>
+            </div>
 
-  } catch (error) {
-    aiMessage.textContent =
-      "AI7: My AI connection is not configured yet. Please try again later.";
-  }
+            <p id="status">AI7 Demo Mode</p>
 
-  chat.scrollTop = chat.scrollHeight;
-}
-}
-function logout(){
- document.getElementById('assistant').hidden=true;
- document.getElementById('login').hidden=false;
- document.getElementById('username').value='';
-}
-</script>
+        </section>
+
+        <section class="features">
+            <h2>AI7 Capabilities</h2>
+
+            <div class="feature-grid">
+                <div>💬 General Questions</div>
+                <div>🧮 Mathematics</div>
+                <div>💻 Coding</div>
+                <div>🔬 Science</div>
+                <div>📄 Documents</div>
+                <div>🖼️ Image Understanding</div>
+                <div>🎙️ Voice Assistance</div>
+                <div>🎬 Video Understanding</div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>AI7 | Developed by Kamesh.L.S</p>
+    </footer>
+
+    <script src="js/router.js"></script>
+    <script src="js/app.js"></script>
+
 </body>
 </html>
