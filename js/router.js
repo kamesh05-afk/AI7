@@ -1,58 +1,30 @@
-function identifyTask(question) {
+export function identifyTask(question) {
 
-const text = question.toLowerCase();
+    const text = question.toLowerCase();
 
-if (
-    text.includes("image") ||
-    text.includes("photo") ||
-    text.includes("picture")
-) {
-    return "Image AI";
-}
+    if (/image|photo|picture/.test(text)) {
+        return "Image AI";
+    }
 
-if (
-    text.includes("video") ||
-    text.includes("movie")
-) {
-    return "Video AI";
-}
+    if (/video|movie/.test(text)) {
+        return "Video AI";
+    }
 
-if (
-    text.includes("code") ||
-    text.includes("coding") ||
-    text.includes("program") ||
-    text.includes("python") ||
-    text.includes("javascript") ||
-    text.includes("java") ||
-    text.includes("debug")
-) {
-    return "Coding AI";
-}
+    if (/code|coding|program|python|javascript|java|debug/.test(text)) {
+        return "Coding AI";
+    }
 
-if (
-    text.includes("math") ||
-    text.includes("calculate") ||
-    text.includes("solve") ||
-    text.includes("equation")
-) {
-    return "Mathematics AI";
-}
+    if (/math|calculate|solve|equation/.test(text)) {
+        return "Mathematics AI";
+    }
 
-if (
-    text.includes("pdf") ||
-    text.includes("document")
-) {
-    return "Document AI";
-}
+    if (/pdf|document/.test(text)) {
+        return "Document AI";
+    }
 
-if (
-    text.includes("science") ||
-    text.includes("physics") ||
-    text.includes("chemistry")
-) {
-    return "Science AI";
-}
+    if (/science|physics|chemistry/.test(text)) {
+        return "Science AI";
+    }
 
-return "General AI";
-
+    return "General AI";
 }
