@@ -1,2 +1,2 @@
 # AI7
-AI7 - My Personal AI Assistant 
+AI7 - Your Personal AI Assistant 
